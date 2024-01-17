@@ -2,6 +2,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { jwtDecode, JwtHeader, JwtPayload } from "jwt-decode";
 import { post } from "./api";
 import { useState } from "react";
+import { registerRequestModel } from "@/Models/Auth/register";
 
 interface UserInfo {
   username: string;
@@ -18,10 +19,10 @@ export const useAuth = () => {
     if (error.response) {
       const errorMessage = (error.response.data as { error?: string })?.error || "Unknown error occurred";
       console.error("Error fetching data:", errorMessage);
-      return errorMessage;
+      throw errorMessage;
     } else {
       console.error("Network error during login:", error.message);
-      return null;
+      throw null;
     }
   };
 
@@ -51,5 +52,35 @@ export const useAuth = () => {
     }
   };
 
-  return { userInfo, login };
+  const register = async (registerData: registerRequestModel): Promise<UserInfo | string | null> => {
+    try {
+      let object: registerRequestModel = {
+        firstName: registerData.firstName,
+        lastName: registerData.lastName,
+        username: registerData.username,
+        password: registerData.password,
+        rePassword: registerData.rePassword,
+        phoneNumber: registerData.phoneNumber,
+      };
+      const response: AxiosResponse<{ message: string }> = await post("/user/register", {
+        firstName: object.firstName,
+        lastName: object.lastName,
+        username: object.username,
+        password: object.password,
+        rePassword: object.rePassword,
+        phoneNumber: object.phoneNumber,
+      });
+
+      return "";
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        throw handleAxiosError(error);
+      } else {
+        console.error("Unexpected error:", error);
+        throw null;
+      }
+    }
+  };
+
+  return { userInfo, login, register };
 };

@@ -17,8 +17,10 @@ const InputField: React.FC<InputFieldProps> = ({ value, onChange, type, placehol
   return (
     <TextField
       type={type}
+      autoComplete="new-password"
       style={{ ...style }}
       InputProps={{
+        autoComplete:"new-password",
         style: { ...inputStyle, color: "white" },
       }}
       fullWidth
