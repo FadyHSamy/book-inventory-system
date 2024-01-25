@@ -1,14 +1,9 @@
-"use client"
-import { useRouter } from "next/navigation";
+"use client";
 import React from "react";
 import { useEffect } from "react";
 
 function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.push("/sign-in", { scroll: false });
-  }, []);
+  useEffect(() => {}, []);
   return <label>tests</label>;
 }
 

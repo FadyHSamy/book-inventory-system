@@ -10,6 +10,7 @@ function SignIn() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
+  const backgroundColor = "#093545";
 
   const handleUserNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value);
@@ -45,6 +46,7 @@ function SignIn() {
       alignItems: "center",
       minHeight: "100vh",
       position: "relative",
+      backgroundColor: backgroundColor,
     },
     card: {
       backgroundColor: "transparent",
@@ -69,7 +71,7 @@ function SignIn() {
               Sign in
             </Typography>
             <InputLabel style={{ color: "#FFF" }}>Sign in and start managing your candidates!</InputLabel>
-            <InputField placeholder={"Username"} value={username} onChange={handleUserNameChange} type={"text"} ></InputField>
+            <InputField placeholder={"Username"} value={username} onChange={handleUserNameChange} type={"text"}></InputField>
             <PasswordField placeholder={"Password"} value={password} onChange={handlePasswordChange}></PasswordField>
             <Grid container direction="row" justifyContent="space-between" alignItems="center">
               <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" style={{ color: "#FFF" }} />
